@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="input">
+  <div class="container">
+    <div class="name">
         <p>카페 이름 | </p>
         <input placeholder="카페의 이름을 알려주세요!" v-model="name" @keydown.enter="searchCafeByName">
     </div>
@@ -64,7 +64,7 @@ export default {
         });
         marker.setMap(this.map);
         var iwContent = 
-        '<div style="padding:5px;">'+name+'<br><a href="https://map.kakao.com/link/map/'+id+'" style="color:blue" target="_blank">큰지도보기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        '<div style="padding:10px;">'+name+'<br><a href="https://map.kakao.com/link/map/'+id+'" style="color:blue" target="_blank">큰지도보기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
             iwPosition = new kakao.maps.LatLng(latitude,longitude); //인포윈도우 표시 위치입니다
 
         // 인포윈도우를 생성합니다
@@ -81,16 +81,21 @@ export default {
 </script>
 
 <style>
-.input {
+.container {
+    width: 414px;
+}
+.name {
     display: flex;
     background: #ffffff;
     border-radius: 15px;
     box-shadow: 2px 2px #e5e5e5;
     position: fixed;
-    top: 10;
+    width: 250px;
+    top: 50px;
     z-index: 10;
+    padding: 20px;
 }
-input {
+.name input {
   border: none;
   text-align: center;
 }

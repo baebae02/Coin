@@ -1,23 +1,24 @@
 <template>
   <div class="container">
-    <div>
-      <div class="input">
-        <p>카페 이름 | </p>
-        <input placeholder="카페의 이름을 알려주세요!" v-model="name">
-        <p>카페 설명 | </p>
-        <input placeholder="카페의 설명을 알려주세요!" v-model="descript">
-        <p>카페 주소 | </p>
-        <input placeholder="카페의 주소를 알려주세요!" v-model="address">
-        <p>카페 분류 |</p>
-        <input placeholder="정문, 후문, 쪽문 중에 골라주세요!" v-model="locate">
-        <p>카페 연락처 |</p>
-        <input placeholder="카페의 전화번호를 알려주세요!" v-model="phone">
-        <p>별점 |</p>
-        <input placeholder="별점을 매겨주세요!" v-model="star">
-        <div class="btn">
-          <Button @click="postCafe()">등록하기!</Button>
-        </div>
-      </div>
+    <div class="text">
+       ⭐공유하고 싶은 카페를 등록해주세요!⭐
+    </div>
+    <div class="enroll">
+      <p>카페 이름 | </p>
+      <input placeholder="카페의 이름을 알려주세요!" v-model="name">
+      <p>카페 설명 | </p>
+      <input placeholder="카페의 설명을 알려주세요!" v-model="descript">
+      <p>카페 주소 | </p>
+      <input placeholder="카페의 주소를 알려주세요!" v-model="address">
+      <p>카페 분류 |</p>
+      <input placeholder="정문, 후문, 쪽문, 회기 중에 골라주세요!" v-model="locate">
+      <p>카페 연락처 |</p>
+      <input placeholder="카페의 전화번호를 알려주세요!" v-model="phone">
+      <p>별점 |</p>
+      <input placeholder="별점을 매겨주세요!" v-model="star">
+    </div>
+    <div class="btn">
+      <Button @click="postCafe()">등록하기!</Button>
     </div>
   </div>
 </template>
@@ -60,26 +61,41 @@ export default {
 </script>
 
 <style>
-
-.input {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 2px 2px #e5e5e5;
-    justify-content: space-around;
-    margin: 20px;
-    padding: 20px;
-    row-gap: 10px;
+.text {
+  margin-top: 10px;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.932);
+  border-radius: 15px;
+  margin: 10px auto;
+  padding: 5px 10px;
 }
-input {
+.enroll {
+  width: 350px;
+  background: rgb(255, 255, 255);
+  border-radius: 15px;
+  box-shadow: 2px 2px rgb(185, 185, 185, 0.5);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  row-gap: 10px;
+  padding: 5px;
+  margin: 10px auto;
+}
+.enroll input {
   border: none;
-  text-align: center;
 }
 
 input:focus {outline:none;}
 .btn {
-  width: 100%;
-  margin: 0 auto;
+  margin: 10px auto;
+  background: rgb(255, 255, 255);
+  border-radius: 15px;
+  box-shadow: 2px 2px rgb(185, 185, 185, 0.5);
+  padding: 10px 20px;
+}
+.btn Button {
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: white;
 }
 </style>
