@@ -4,7 +4,8 @@
             <div class="nav">
                 <div class="place" @click="displayMarker(markerPositions1)">정문</div>
                 <div class='place' @click="displayMarker(markerPositions2)">후문</div>
-                <div class='place' @click="displayMarker(markerPositions3)">쪽문</div>
+                <div class='place' @click="displayMarker(markerPositions3)">회기</div>
+                <div class='place' @click="displayMarker(markerPositions4)">쪽문</div>
             </div>
         </div>
         <div class="body">
@@ -121,10 +122,8 @@ export default {
             for (var i in data) {
                 var cafe = data[i];
                 var locate = [cafe.longitude, cafe.latitude];
-                console.log(locate);
                 if(cafe.location == "정문")
                     this.markerPositions1.push(locate);
-                    console.log("정문" , this.markerPositions1);
                 if(cafe.location == "후문")
                     this.markerPositions2.push(locate);
                 if(cafe.location == "회기")

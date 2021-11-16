@@ -1,20 +1,22 @@
 <template>
   <div class="container">
-    <div class="input">
-      <p>카페 이름 | </p>
-      <input placeholder="카페의 이름을 알려주세요!" v-model="name">
-      <p>카페 설명 | </p>
-      <input placeholder="카페의 설명을 알려주세요!" v-model="descript">
-      <p>카페 주소 | </p>
-      <input placeholder="카페의 주소를 알려주세요!" v-model="address">
-      <p>카페 분류 |</p>
-      <input placeholder="정문, 후문, 쪽문 중에 골라주세요!" v-model="locate">
-      <p>카페 연락처 |</p>
-      <input placeholder="카페의 전화번호를 알려주세요!" v-model="phone">
-      <p>별점 |</p>
-      <input placeholder="별점을 매겨주세요!" v-model="star">
-      <div class="btn">
-        <Button @click="postCafe()">등록하기!</Button>
+    <div>
+      <div class="input">
+        <p>카페 이름 | </p>
+        <input placeholder="카페의 이름을 알려주세요!" v-model="name">
+        <p>카페 설명 | </p>
+        <input placeholder="카페의 설명을 알려주세요!" v-model="descript">
+        <p>카페 주소 | </p>
+        <input placeholder="카페의 주소를 알려주세요!" v-model="address">
+        <p>카페 분류 |</p>
+        <input placeholder="정문, 후문, 쪽문 중에 골라주세요!" v-model="locate">
+        <p>카페 연락처 |</p>
+        <input placeholder="카페의 전화번호를 알려주세요!" v-model="phone">
+        <p>별점 |</p>
+        <input placeholder="별점을 매겨주세요!" v-model="star">
+        <div class="btn">
+          <Button @click="postCafe()">등록하기!</Button>
+        </div>
       </div>
     </div>
   </div>
@@ -43,9 +45,9 @@ export default {
            "description" : this.descript,
            "locate" : this.locate,
            "kakao_id": "682378583",
-           "latitude": 127.052942,
+           "latitude": 127.052990,
            "link": "www.instagram.com/964__coffee",
-           "longitude": 37.5854582,
+           "longitude": 37.5854522,
            "name" : this.name,
            "open_hour": "매일 08:00 ~ 22:00",
            "star": this.star,
