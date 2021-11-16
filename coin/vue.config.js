@@ -5,7 +5,7 @@ module.exports = {
         public: '0.0.0.0:8080',
         proxy: {
             '^/api/': {
-              target: '0.0.0.0:5000',
+              target: 'http://0.0.0.0:5000',
               ws: true,
               changㄴeOrigin: true,
             },
