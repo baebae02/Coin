@@ -1,8 +1,5 @@
 <template>
   <div class="container">
-    <div class="text">
-      <p>카페를 새로 등록하고 싶다면?</p>
-    </div>
     <div class="input">
         <p>카페 이름 | </p>
         <input placeholder="카페의 이름을 알려주세요!">
@@ -25,13 +22,7 @@ export default {
 </script>
 
 <style>
-.container {
-  display: flex;
-}
-.text {
-  padding: 10px;
-  color: white;
-}
+
 .input {
     display: grid;
     grid-template-columns: 1fr 3fr;
