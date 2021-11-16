@@ -37,17 +37,30 @@ export default {
     methods: {
       async searchCafeByName() {
         const data = await Cafe.get(1, 20, this.name, this.location);
-        console.log(data);
+        this.setMark(data[0].longitude,data[0].latitude)
       },
       //지도 만들기
-      initMap() {
-          const container = document.getElementById("map");
+      async initMap() {
+        const container = document.getElementById("map");
           const options = {
-              center: new kakao.maps.LatLng(37.5825627, 127.059971),
+            center: new kakao.maps.LatLng(37.5825627, 127.059971),
               level: 5,
           };
           this.map = new kakao.maps.Map(container, options);
       },
+      async setMark(latitude, longitude) {
+        const container = document.getElementById("map");
+        const options = {
+          center: new kakao.maps.LatLng(37.5825627, 127.059971),
+            level: 5,
+        };
+        this.map = new kakao.maps.Map(container, options);
+        var markerPosition  = new kakao.maps.LatLng(latitude,longitude); 
+        var marker = new kakao.maps.Marker({
+          position: markerPosition
+        });
+        marker.setMap(this.map);
+      }
     }
 }
 </script>
