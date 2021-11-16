@@ -1,5 +1,6 @@
 <template>
     <Container>
+      <TopBar />
       <ContentContainer>
         <router-view/>
       </ContentContainer>
@@ -28,6 +29,7 @@
 </style>
 <script>
 import Container from './components/Container';
+import TopBar from "./components/TopBar";
 import NavBar from './components/NavBar.vue';
 import styled, { css } from 'vue3-styled-components';
 
@@ -58,6 +60,7 @@ export default {
   components: {
     NavigationContainer,
     ContentContainer,
+    TopBar,
     NavBar,
     Container,
   },
