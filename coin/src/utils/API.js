@@ -4,7 +4,7 @@ import qs from 'qs';
 const API = async (method, url, data) => {
   const config = {
     method,
-    url,
+    url: 'http://0.0.0.0:5000' + url,
     withCredentials: true,
     paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }),
     validateStatus: status => status >= 200 && status < 300,

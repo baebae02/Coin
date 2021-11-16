@@ -1,21 +1,27 @@
 <template>
   <div class="container">
     <div class="input">
-        <p>카페 이름 | </p>
-        <input placeholder="카페의 이름을 알려주세요!" v-model="name">
-        <p>카페 설명 | </p>
-        <input placeholder="카페의 설명을 알려주세요!" v-model="descript">
-        <p>카페 주소 | </p>
-        <input placeholder="카페의 주소를 알려주세요!" v-model="address">
-        <p>카페 연락처 |</p>
-        <input placeholder="카페의 전화번호를 알려주세요!" v-model="phone">
-        <p>별점 |</p>
-        <input placeholder="별점을 매겨주세요!" v-model="star">
+      <p>카페 이름 | </p>
+      <input placeholder="카페의 이름을 알려주세요!" v-model="name">
+      <p>카페 설명 | </p>
+      <input placeholder="카페의 설명을 알려주세요!" v-model="descript">
+      <p>카페 주소 | </p>
+      <input placeholder="카페의 주소를 알려주세요!" v-model="address">
+      <p>카페 분류 |</p>
+      <input placeholder="정문, 후문, 쪽문 중에 골라주세요!" v-model="locate">
+      <p>카페 연락처 |</p>
+      <input placeholder="카페의 전화번호를 알려주세요!" v-model="phone">
+      <p>별점 |</p>
+      <input placeholder="별점을 매겨주세요!" v-model="star">
+      <div class="btn">
+        <Button @click="postCafe()">등록하기!</Button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Cafe from '../api/Cafe';
 export default {
      name: 'Add',
      data() {
@@ -25,10 +31,27 @@ export default {
          address: "",
          phone: "",
          start: "",
+         locate: "",
+         star: 0,
        }
      },
      methods: {
-       
+       postCafe() {
+         const data = {
+           "address" : this.address,
+           "contact" : this.phone,
+           "description" : this.descript,
+           "locate" : this.locate,
+           "kakao_id": "682378583",
+           "latitude": 127.052942,
+           "link": "www.instagram.com/964__coffee",
+           "longitude": 37.5854582,
+           "name" : this.name,
+           "open_hour": "매일 08:00 ~ 22:00",
+           "star": this.star,
+         }
+         Cafe.post(data);
+       }
      }
 }
 
@@ -53,4 +76,8 @@ input {
 }
 
 input:focus {outline:none;}
+.btn {
+  width: 100%;
+  margin: 0 auto;
+}
 </style>

@@ -14,6 +14,7 @@
 </template>
 
 <script>
+// import Cafe from '../api/Cafe';
 export default {
     name: 'Intro',
     data() {
@@ -59,6 +60,7 @@ export default {
                 "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=31652f421b801ed9daa3adf27ec87f89";
             document.head.appendChild(script);
         }
+        // console.log(Cafe.get());
     },
     methods: {
         //지도 만들기
