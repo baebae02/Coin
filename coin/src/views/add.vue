@@ -2,15 +2,15 @@
   <div class="container">
     <div class="input">
         <p>카페 이름 | </p>
-        <input placeholder="카페의 이름을 알려주세요!">
+        <input placeholder="카페의 이름을 알려주세요!" v-model="name">
         <p>카페 설명 | </p>
-        <input placeholder="카페의 설명을 알려주세요!">
+        <input placeholder="카페의 설명을 알려주세요!" v-model="descript">
         <p>카페 주소 | </p>
-        <input placeholder="카페의 주소를 알려주세요!">
+        <input placeholder="카페의 주소를 알려주세요!" v-model="address">
         <p>카페 연락처 |</p>
-        <input placeholder="카페의 전화번호를 알려주세요!">
+        <input placeholder="카페의 전화번호를 알려주세요!" v-model="phone">
         <p>별점 |</p>
-        <input placeholder="별점을 매겨주세요!">
+        <input placeholder="별점을 매겨주세요!" v-model="star">
     </div>
   </div>
 </template>
@@ -18,7 +18,20 @@
 <script>
 export default {
      name: 'Add',
+     data() {
+       return {
+         name: "",
+         descript: "",
+         address: "",
+         phone: "",
+         start: "",
+       }
+     },
+     methods: {
+       
+     }
 }
+
 </script>
 
 <style>

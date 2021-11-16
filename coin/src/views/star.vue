@@ -1,17 +1,20 @@
 <template>
   <div class="container">
+    <div class="text">
+      별점 5점짜리 카페들을 모아봤어요!
+    </div>
     <!-- <div class="input" v-for= "cafe in cafelist" v-bind:key="cafe"> -->
-      <div class="input">
-        <p>카페 이름 | </p>
-        <p>ddd</p>
-        <p>카페 설명 | </p>
-        <p></p>
-        <p>카페 주소 | </p>
-        <p></p>
-        <p>카페 연락처 |</p>
-        <p></p>
-        <p>별점 |</p>
-        <p>5</p>
+    <div class="input">
+      <p>카페 이름 | </p>
+      <p>ddd</p>
+      <p>카페 설명 | </p>
+      <p></p>
+      <p>카페 주소 | </p>
+      <p></p>
+      <p>카페 연락처 |</p>
+      <p></p>
+      <p>별점 |</p>
+      <p>5</p>
     </div>
   </div>
 </template>
