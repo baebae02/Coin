@@ -11,7 +11,7 @@ const API = async (method, url, data) => {
   };
 
   if (['get', 'delete'].includes(method.toLowerCase())) {
-    config.params = { ...data, currentTime: Date.now() };
+    config.params = { ...data };
   } else {
     config.data = data;
   }

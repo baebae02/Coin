@@ -2,13 +2,14 @@
   <div>
     <div class="input">
         <p>카페 이름 | </p>
-        <input placeholder="카페의 이름을 알려주세요!">
+        <input placeholder="카페의 이름을 알려주세요!" v-model="name" @keydown.enter="searchCafeByName">
     </div>
     <div id="map"></div>
   </div>
 </template>
 
 <script>
+import Cafe from '../api/Cafe';
 export default {
     name: 'Search',
     data() {
@@ -17,6 +18,8 @@ export default {
           map: null,
           markers: [],
           infowindow: null,
+          name: '',
+          location: '',
         }
     },
     mounted() {
@@ -32,6 +35,10 @@ export default {
         }
     },
     methods: {
+      async searchCafeByName() {
+        const data = await Cafe.get(1, 20, this.name, this.location);
+        console.log(data);
+      },
       //지도 만들기
       initMap() {
           const container = document.getElementById("map");

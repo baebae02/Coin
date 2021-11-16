@@ -14,7 +14,7 @@ const Cafe = {
       return response.data;
   },
   get: async (page, per_page, name, location) => {
-      const response = await('GET', CAFE, {page, per_page, name, location});
+      const response = await API('GET', CAFE, {page, per_page, name, location});
       if(response.status!==200) throw new Error(AUTH_ERROR.NOT_FOUND);
       return response.data;
   },
