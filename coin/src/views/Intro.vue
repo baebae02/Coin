@@ -14,7 +14,7 @@
 </template>
 
 <script>
-// import Cafe from '../api/Cafe';
+import Cafe from '../api/Cafe';
 export default {
     name: 'Intro',
     data() {
@@ -22,9 +22,9 @@ export default {
             place: true,
             map: null,
             markerPositions1: [ //정문
-                [37.5854582, 127.052942], //너디블루
-                [37.5834939, 127.053201], //시사
-                [37.5832233, 127.053948], //정문 투썸
+                // [37.5854582, 127.052942], //너디블루
+                // [37.5834939, 127.053201], //시사
+                // [37.5832233, 127.053948], //정문 투썸
             ],
             markerPositions2: [ //후문
                 [37.5854183, 127.060992], //싸가지
@@ -47,9 +47,11 @@ export default {
             ],
             markers: [],
             infowindow: null,
+            cafes: [],
         };
     },
     mounted() {
+        this.loadCafes();
         if (window.kakao && window.kakao.maps) {
             this.initMap();
         } else {
@@ -60,11 +62,10 @@ export default {
                 "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=31652f421b801ed9daa3adf27ec87f89";
             document.head.appendChild(script);
         }
-        // console.log(Cafe.get());
     },
     methods: {
         //지도 만들기
-        initMap() {
+        async initMap() {
             const container = document.getElementById("map");
             const options = {
                 center: new kakao.maps.LatLng(37.5825627, 127.059971),
@@ -73,7 +74,7 @@ export default {
             this.map = new kakao.maps.Map(container, options);
         },
         //마커 표시하기 
-        displayMarker(markerPositions) {
+        async displayMarker(markerPositions) {
             if (this.markers.length > 0) {
                 this.markers.forEach((marker) => marker.setMap(null));
             }
@@ -97,7 +98,7 @@ export default {
                 this.map.setBounds(bounds);
             }
         },
-        displayInfoWindow() {
+        async displayInfoWindow() {
             if (this.infowindow && this.infowindow.getMap()) {
                 //이미 생성한 인포윈도우가 있기 때문에 지도 중심좌표를 인포윈도우 좌표로 이동시킨다.
                 this.map.setCenter(this.infowindow.getPosition());
@@ -114,6 +115,24 @@ export default {
             });
             this.map.setCenter(iwPosition);
         },
+        async loadCafes() {
+            const data = await Cafe.get(1, 20);
+            this.cafes = data;
+            for (var i in data) {
+                var cafe = data[i];
+                var locate = [cafe.longitude, cafe.latitude];
+                console.log(locate);
+                if(cafe.location == "정문")
+                    this.markerPositions1.push(locate);
+                    console.log("정문" , this.markerPositions1);
+                if(cafe.location == "후문")
+                    this.markerPositions2.push(locate);
+                if(cafe.location == "회기")
+                    this.markerPositions3.push(locate);
+                if(cafe.location == "쪽문")
+                    this.markerPositions4.push(locate);
+            }
+        }
     }
 }
 </script>

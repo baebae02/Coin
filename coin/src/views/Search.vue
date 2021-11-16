@@ -37,6 +37,7 @@ export default {
     methods: {
       async searchCafeByName() {
         const data = await Cafe.get(1, 20, this.name, this.location);
+        console.log(data[0]);
         this.setMark(data[0].longitude,data[0].latitude, data[0].name, data[0].kakao_id);
       },
       //지도 만들기
