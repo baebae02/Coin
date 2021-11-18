@@ -4,18 +4,41 @@
        ⭐공유하고 싶은 카페를 등록해주세요!⭐
     </div>
     <div class="enroll">
-      <p>카페 이름 | </p>
+      <label>카페 이름</label>
       <input placeholder="카페의 이름을 알려주세요!" v-model="name">
-      <p>카페 설명 | </p>
-      <input placeholder="카페의 설명을 알려주세요!" v-model="descript">
-      <p>카페 주소 | </p>
+
+      <label>카페 설명</label>
+      <textarea placeholder="카페의 설명을 알려주세요!" v-model="description">
+      </textarea>
+
+      <label>카페 주소</label>
       <input placeholder="카페의 주소를 알려주세요!" v-model="address">
-      <p>카페 분류 |</p>
-      <input placeholder="정문, 후문, 쪽문, 회기 중에 골라주세요!" v-model="locate">
-      <p>카페 연락처 |</p>
+
+      <label>카페 위치</label>
+      <div class="radioContainer">
+        <label>
+          <input type="radio" class="form-radio" name="radio" value="front" v-model="location" checked/>
+          <span class="ml-2">정문</span>
+        </label>
+        <label>
+          <input type="radio" class="form-radio" name="radio" value="back" v-model="location"/>
+          <span class="ml-2">후문</span>
+        </label>
+        <label>
+          <input type="radio" class="form-radio" name="radio" value="hoegi" v-model="location"/>
+          <span class="ml-2">회기</span>
+        </label>
+        <label>
+          <input type="radio" class="form-radio" name="radio" value="side" v-model="location"/>
+          <span class="ml-2">쪽문</span>
+        </label>
+      </div>
+
+      <label>전화번호</label>
       <input placeholder="카페의 전화번호를 알려주세요!" v-model="phone">
-      <p>별점 |</p>
-      <input placeholder="별점을 매겨주세요!" v-model="star">
+
+      <label>별점</label>
+      <input placeholder="별점을 매겨주세요! (1~5)" v-model="star" type="number">
     </div>
     <div class="btn">
       <Button @click="postCafe()">등록하기!</Button>
@@ -30,28 +53,30 @@ export default {
      data() {
        return {
          name: "",
-         descript: "",
+         description: "",
          address: "",
          phone: "",
          start: "",
-         locate: "",
+         location: "front",
          star: 0,
        }
      },
      methods: {
        postCafe() {
          const data = {
+           "name" : this.name,
+           "description" : this.description,
+           "open_hour": "매일 08:00 ~ 22:00",
            "address" : this.address,
            "contact" : this.phone,
-           "description" : this.descript,
-           "locate" : this.locate,
+           "link": "www.instagram.com/964__coffee",
+
+           "location" : this.location,
+           "star": this.star,
+
            "kakao_id": "682378583",
            "latitude": 127.052990,
-           "link": "www.instagram.com/964__coffee",
            "longitude": 37.5854522,
-           "name" : this.name,
-           "open_hour": "매일 08:00 ~ 22:00",
-           "star": this.star,
          }
          Cafe.post(data);
        }
@@ -60,9 +85,8 @@ export default {
 
 </script>
 
-<style>
+<style lang="scss">
 .text {
-  margin-top: 10px;
   font-size: 15px;
   background: rgba(255, 255, 255, 0.932);
   border-radius: 15px;
@@ -79,12 +103,22 @@ export default {
   row-gap: 10px;
   padding: 5px;
   margin: 10px auto;
-}
-.enroll input {
-  border: none;
+  & > label {
+    align-self: center;
+  }
+  & > .radioContainer {
+    text-align: left;
+  }
+  & > input, textarea {
+    border: none;
+  }
+  & > textarea {
+    height: 48px;
+  }
 }
 
-input:focus {outline:none;}
+
+input:focus, textarea:focus {outline:none;}
 .btn {
   margin: 10px auto;
   background: rgb(255, 255, 255);
