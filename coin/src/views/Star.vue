@@ -37,9 +37,15 @@ export default {
        async loadCafes() {
             const data = await Cafe.get(1, 20);
             this.cafes = data;
-            for (var i in data) {
-                var cafe = data[i];
-                if(cafe.star == 0)
+            console.log(data);
+            console.log("cafelist", this.cafelist);
+            console.log("cafe", data.items);
+            var len = data.items.length;
+            for (var i=0; i<=len; i++) {
+                var cafe = data.items[i];
+                console.log(cafe.star);
+                console.log("CAFE", cafe);
+                if(cafe.star == 5)
                     this.cafelist.push(cafe);
             }
             console.log(this.cafelist[0]);

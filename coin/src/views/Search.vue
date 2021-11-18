@@ -37,8 +37,9 @@ export default {
     methods: {
       async searchCafeByName() {
         const data = await Cafe.get(1, 20, this.name, this.location);
-        console.log(data[0]);
-        this.setMark(data[0].longitude,data[0].latitude, data[0].name, data[0].kakao_id);
+        console.log(data.items[0]);
+        const result = data.items[0];
+        this.setMark(result.longitude,result.latitude, result.name, result.kakao_id);
       },
       //지도 만들기
       async initMap() {
@@ -64,7 +65,7 @@ export default {
         });
         marker.setMap(this.map);
         var iwContent = 
-        '<div style="padding:10px;">'+name+'<br><a href="https://map.kakao.com/link/map/'+id+'" style="color:blue" target="_blank">큰지도보기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        '<div style="padding:10px; text-align: center">'+name+'<br><a href="https://map.kakao.com/link/map/'+id+'" style="color:blue" target="_blank">큰지도보기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
             iwPosition = new kakao.maps.LatLng(latitude,longitude); //인포윈도우 표시 위치입니다
 
         // 인포윈도우를 생성합니다
@@ -99,4 +100,5 @@ export default {
   border: none;
   text-align: center;
 }
+
 </style>
