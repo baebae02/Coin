@@ -11,6 +11,7 @@ const API = async (method, url, data) => {
   };
 
   if (['get', 'delete'].includes(method.toLowerCase())) {
+    Object.keys(data).forEach((key) => (data[key] == '') && delete data[key]);
     config.params = { ...data };
   } else {
     config.data = data;
