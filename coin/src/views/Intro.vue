@@ -2,10 +2,11 @@
     <div class="container">
         <div class="header">
             <div class="nav">
-                <div class="place" @click="displayMarker(markerPositions1)">정문</div>
-                <div class='place' @click="displayMarker(markerPositions2)">후문</div>
-                <div class='place' @click="displayMarker(markerPositions3)">회기</div>
-                <div class='place' @click="displayMarker(markerPositions4)">쪽문</div>
+                <div class="place" @click="displayMarker(frontCafes)">정문</div>
+                <div class='place' @click="displayMarker(backCafes)">후문</div>
+                <div class='place' @click="displayMarker(hoegiCafes)">회기</div>
+                <div class='place' @click="displayMarker(sideCafes)">쪽문</div>
+                <div class='place' @click="displayMarker(cafes)">전체</div>
             </div>
         </div>
         <div class="body">
@@ -16,53 +17,34 @@
 
 <script>
 import Cafe from '../api/Cafe';
+
 export default {
     name: 'Intro',
     data() {
         return {
             place: true,
             map: null,
-            markerPositions1: [ //정문
-                // [37.5854582, 127.052942], //너디블루
-                // [37.5834939, 127.053201], //시사
-                // [37.5832233, 127.053948], //정문 투썸
-            ],
-            markerPositions2: [ //후문
-                [37.5854183, 127.060992], //싸가지
-                [37.5889331, 127.059183], //빵샘제빵소
-                [37.5854183, 127.060992], //플리즈커피
-                [37.5893374, 127.061482], //오프사이트
-                [37.5888688, 127.061527], //카페시그널
-            ],
-            markerPositions3: [ //회기
-                [37.5899240, 127.059467], //너만보여 크루아상
-                [37.5899324, 127.060814], //커피나무
-                [37.5903408, 127.054463], //리드스트리트 커피
-                [37.5907996, 127.056037], //스타벅스 회기사거리역점
-                [37.5901863, 127.057440], //이디야
-                [37.5897990, 127.057044], //탐앤탐스
-            ],
-            markerPositions4: [ //쪽문
-                [37.5864026, 127.056385], //커피베이
-                [37.5880963, 127.056816], //망우로30
-            ],
+            frontCafes: [],
+            backCafes: [],
+            hoegiCafes: [],
+            sideCafes: [],
             markers: [],
             infowindow: null,
             cafes: [],
         };
     },
-    mounted() {
-        this.loadCafes();
-        if (window.kakao && window.kakao.maps) {
-            this.initMap();
-        } else {
-            const script = document.createElement("script");
-            /* global kakao */
-            script.onload = () => kakao.maps.load(this.initMap);
-            script.src =
-                "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=31652f421b801ed9daa3adf27ec87f89";
-            document.head.appendChild(script);
-        }
+    async mounted() {
+      await this.loadCafes();
+      if (window.kakao && window.kakao.maps) {
+        await this.initMap();
+      } else {
+        const script = document.createElement("script");
+        /* global kakao */
+        script.onload = () => kakao.maps.load(this.initMap);
+        script.src =
+            "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=31652f421b801ed9daa3adf27ec87f89";
+        document.head.appendChild(script);
+      }
     },
     methods: {
         //지도 만들기
@@ -74,15 +56,15 @@ export default {
             };
             this.map = new kakao.maps.Map(container, options);
         },
-        //마커 표시하기 
-        async displayMarker(markerPositions) {
+        //마커 표시하기
+        async displayMarker(cafes) {
             if (this.markers.length > 0) {
                 this.markers.forEach((marker) => marker.setMap(null));
             }
 
-            const positions = markerPositions.map(
-                (position) => new kakao.maps.LatLng(...position)
-            );
+            const positions = cafes.map(
+                (cafe) => new kakao.maps.LatLng(cafe.longitude, cafe.latitude)
+            )
 
             if (positions.length > 0) {
                 this.markers = positions.map(
@@ -117,19 +99,18 @@ export default {
             this.map.setCenter(iwPosition);
         },
         async loadCafes() {
-            const data = await Cafe.get(1, 20);
+            const data = await Cafe.get(1, 200);
             this.cafes = data;
-            for (var i in data) {
-                var cafe = data[i];
-                var locate = [cafe.longitude, cafe.latitude];
+            for (const i in data) {
+                const cafe = data[i];
                 if(cafe.location == "정문")
-                    this.markerPositions1.push(locate);
-                if(cafe.location == "후문")
-                    this.markerPositions2.push(locate);
-                if(cafe.location == "회기")
-                    this.markerPositions3.push(locate);
-                if(cafe.location == "쪽문")
-                    this.markerPositions4.push(locate);
+                      this.frontCafes.push(cafe);
+                  else if(cafe.location == "후문")
+                      this.backCafes.push(cafe);
+                  else if(cafe.location == "회기")
+                      this.hoegiCafes.push(cafe);
+                  else if(cafe.location == "쪽문")
+                      this.sideCafes.push(cafe);
             }
         }
     }
