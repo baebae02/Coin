@@ -100,7 +100,7 @@ export default {
         },
         async loadCafes() {
             const data = await Cafe.get(1, 200);
-            this.cafes = data;
+            this.cafes = data.items;
             for (const i in data) {
                 const cafe = data[i];
                 if(cafe.location == "정문")
