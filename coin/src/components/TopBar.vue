@@ -1,7 +1,7 @@
 <template>
   <div v-bind="this.$props" class="top-bar">
     <div @click="this.$router.go(-1)">
-      <img src="@/assets/logo.png" alt="뒤로가기" />
+      <img src="@/assets/logo.jpeg" alt="뒤로가기" />
     </div>
     <div style="font-size: 18px">{{ title }}</div>
     <div style="font-size: 14px">{{ description }}</div>
