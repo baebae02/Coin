@@ -11,9 +11,7 @@
       <textarea placeholder="카페의 설명을 알려주세요!" v-model="description">
       </textarea>
 
-      <label>카페 주소
-      <button class="w-button3" @click="openDaumPostcode">주소 검색</button>
-      </label>
+      <label>카페 주소</label>
       <input placeholder="카페의 주소를 알려주세요!" v-model="address">
       <div ref="wrap" style="display:none;position: absolute">
         <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute; right:0; top:0px; z-index:1" @click="foldDaumPostcode" alt="접기 버튼">
@@ -44,8 +42,13 @@
       <label>별점</label>
       <input placeholder="별점을 매겨주세요! (1~5)" v-model="star" type="number">
     </div>
-    <div class="btn">
-      <Button @click="postCafe()">등록하기!</Button>
+    <div class="bottom">
+      <div class="btn">
+        <Button @click="postCafe()">등록하기!</Button>
+      </div>
+      <div class="btn">
+        <Button class="w-button3" @click="openDaumPostcode">주소 검색!</Button>
+      </div>
     </div>
   </div>
 
@@ -177,11 +180,17 @@ input:focus, textarea:focus {outline:none;}
   border-radius: 15px;
   box-shadow: 2px 2px rgb(185, 185, 185, 0.5);
   padding: 10px 20px;
+
 }
 .btn Button {
   border: none;
   font-weight: bold;
   font-size: 15px;
   background-color: white;
+}
+.bottom {
+  display: flex;
+  width: 70%;
+  justify-content: space-around;
 }
 </style>
