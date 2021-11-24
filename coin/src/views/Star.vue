@@ -6,16 +6,18 @@
     <!-- <div class="input" v-for= "cafe in cafelist" v-bind:key="cafe"> -->
     <div class="list" v-for = "cafe in cafelist" v-bind:key="cafe">
       <div class="cafe">
-        <p>카페 이름 | </p>
-        <p>{{cafe.name}}</p>
-        <p>카페 설명 | </p>
-        <p>{{cafe.description}}</p>
-        <p>카페 주소 | </p>
-        <p>{{cafe.address}}</p>
-        <p>카페 연락처 |</p>
-        <p>{{cafe.contact}}</p>
-        <p>별점 |</p>
-        <p>{{cafe.star}}</p>
+        <label>카페 이름</label>
+        <label>{{cafe.name}}</label>
+        <label v-if="cafe.description">카페 설명</label>
+        <label v-if="cafe.description">{{cafe.description}}</label>
+        <label>카페 주소</label>
+        <label>{{cafe.address}}</label>
+        <label v-if="cafe.contact">카페 연락처</label>
+        <label v-if="cafe.contact">{{cafe.contact}}</label>
+        <label>카페 위치</label>
+        <label>{{cafe.location}}</label>
+        <label>별점</label>
+        <label>{{cafe.star}}</label>
       </div>
     </div>
   </div>
@@ -35,7 +37,7 @@ export default {
      },
      methods: {
        async loadCafes() {
-            const data = await Cafe.get(1, 20);
+            const data = await Cafe.get(1, 200);
             this.cafes = data;
             console.log(data);
             console.log("cafelist", this.cafelist);
@@ -54,7 +56,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .text {
   margin-top: 10px;
   font-size: 15px;
@@ -73,5 +75,8 @@ export default {
   row-gap: 10px;
   padding: 5px;
   margin: 10px auto;
+  & > label {
+      align-self: center;
+    }
 }
 </style>
