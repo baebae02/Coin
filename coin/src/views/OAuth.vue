@@ -1,6 +1,6 @@
 <template>
-  <div class="button">
-    <p>Redirected</p>
+  <div class="container">
+    <label>로그인 되었어요!</label>
   </div>
 </template>
 
@@ -43,5 +43,10 @@ export default {
 </script>
 
 <style scoped>
-
+.container {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

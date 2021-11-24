@@ -1,7 +1,8 @@
 <template>
   <div class="container">
+    <label>카카오로 로그인할 수 있어요!</label>
     <img class="button"
-         src="../assets/kakao_login_medium_narrow.png"
+         src="../assets/kakao_login_large_wide.png"
          @click="loginWithKakao">
   </div>
 
@@ -29,7 +30,12 @@ export default {
 
 <style scoped>
 .container {
+  background-color: white;
   display: flex;
+  justify-content: center;
   align-items: center;
+}
+.button {
+  width: 80%;
 }
 </style>
