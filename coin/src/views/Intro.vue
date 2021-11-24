@@ -80,6 +80,14 @@ export default {
                 );
                 this.map.setBounds(bounds);
             }
+
+          for (let i = 0; i < positions.length; i ++) {
+            const marker = this.markers[i];
+            kakao.maps.event.addListener(marker, 'click', function() {
+              const itemId = cafes[i].kakao_id;
+              window.open('https://map.kakao.com/?itemId=' + itemId);
+            });
+          }
         },
         async displayInfoWindow() {
             if (this.infowindow && this.infowindow.getMap()) {
@@ -100,10 +108,9 @@ export default {
         },
         async loadCafes() {
             const data = await Cafe.get(1, 200);
-            console.log(data);
             this.cafes = data.items;
-            for (const i in data) {
-                const cafe = data[i];
+            for (const i in this.cafes) {
+              const cafe = this.cafes[i];
                 if(cafe.location == "정문")
                       this.frontCafes.push(cafe);
                   else if(cafe.location == "후문")
