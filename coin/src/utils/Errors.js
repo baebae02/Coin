@@ -1,5 +1,6 @@
-export const AUTH_ERROR = {
+export const ERROR = {
     UNAUTHORIZED: '로그인이 필요합니다.',
-    NOT_FOUND: '아이디 또는 비밀번호를 확인하세요.',
-    DUPLICATED_NICKNAME: '중복된 아이디입니다.',
+    NOT_FOUND: '카페를 찾지 못 했습니다.',
+    BAD_REQUEST: '입력 양식에 오류가 있습니다.',
+    INTERNAL_SERVER_ERROR: '서버에 오류가 발생했습니다.'
   };

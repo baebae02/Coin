@@ -62,23 +62,28 @@ export default {
        }
      },
      methods: {
-       postCafe() {
+       async postCafe() {
          const data = {
-           "name" : this.name,
-           "description" : this.description,
+           "name": this.name,
+           "description": this.description,
            "open_hour": "매일 08:00 ~ 22:00",
-           "address" : this.address,
-           "contact" : this.phone,
+           "address": this.address,
+           "contact": this.phone,
            "link": "www.instagram.com/964__coffee",
 
-           "location" : this.location,
+           "location": this.location,
            "star": this.star,
 
            "kakao_id": "682378583",
            "latitude": 127.052990,
            "longitude": 37.5854522,
          }
-         Cafe.post(data);
+         try {
+           await Cafe.post(data);
+         } catch (e) {
+           console.error(e);
+           window.alert(e.message);
+         }
        }
      }
 }
