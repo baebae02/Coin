@@ -5,10 +5,13 @@
     </div>
     <div style="font-size: 24px">{{ title }}</div>
     <div style="font-size: 16px">{{ description }}</div>
+    <div class="login" @click="this.$router.push('/login')">{{ login }}?</div>
   </div>
 </template>
 
 <script>
+
+import {KEYS} from "../utils/credentials";
 
 const props = {
   title: {
@@ -24,7 +27,7 @@ const props = {
         case '/':
           return '홈'
         case '/add':
-          return '카페 등록하기'
+          return '카페 등록'
         case '/search':
           return '카페 검색하기'
         case '/star':
@@ -34,6 +37,18 @@ const props = {
       }
     }
   },
+  login: {
+    type: String,
+    default() {
+      /* global Kakao */
+      if (!Kakao.isInitialized())
+        Kakao.init(KEYS.JAVASCRIPT_KEY);
+      if (Kakao.Auth.getAccessToken())
+        return 'Logout';
+      else
+        return 'Login';
+    }
+  }
 };
 export default {
   name: 'TopBar',
@@ -53,11 +68,9 @@ export default {
 <style lang="scss" scoped>
 .top-bar {
   background-color: white;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 12px;
   align-items: center;
   height: 42px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr 6fr;
 }
 </style>

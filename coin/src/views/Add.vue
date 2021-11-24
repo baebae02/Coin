@@ -55,6 +55,7 @@
 </template>
 <script>
 import Cafe from '../api/Cafe';
+import {KEYS} from "../utils/credentials";
 export default {
      name: 'Add',
      data() {
@@ -66,10 +67,28 @@ export default {
          start: "",
          location: "front",
          star: 0,
+         user_id: '',
+         nickname: '',
        }
      },
      methods: {
        async postCafe() {
+         /* global Kakao */
+         if (!Kakao.isInitialized())
+           Kakao.init(KEYS.JAVASCRIPT_KEY);
+
+         Kakao.API.request({
+           url: '/v2/user/me',
+           success: function(response) {
+             console.log(response);
+             this.user_id = response.id;
+             this.nickname = response.properties.nickname;
+           },
+           fail: function(error) {
+             console.log(error);
+           }
+         });
+
          const data = {
            "name" : this.name,
            "description" : this.description,
@@ -84,6 +103,8 @@ export default {
            "kakao_id": "682378583",
            "latitude": 127.052990,
            "longitude": 37.5854522,
+           "creator_id": this.user_id,
+           "creator_nickname": this.nickname,
          }
          try {
            await Cafe.post(data);
