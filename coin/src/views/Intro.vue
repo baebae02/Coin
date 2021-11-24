@@ -102,8 +102,8 @@ export default {
             const data = await Cafe.get(1, 200);
             console.log(data);
             this.cafes = data.items;
-            for (const i in data) {
-                const cafe = data[i];
+            for (const i in this.cafes) {
+              const cafe = this.cafes[i];
                 if(cafe.location == "정문")
                       this.frontCafes.push(cafe);
                   else if(cafe.location == "후문")
