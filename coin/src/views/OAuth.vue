@@ -7,6 +7,7 @@
 <script>
 import {getKakaoToken} from "../utils/KakaoLogin";
 import {KEYS} from "../utils/credentials"
+import {User} from "../api/User"
 
 export default {
   name: "OAuth",
@@ -17,16 +18,21 @@ export default {
     const ACCESS_TOKEN = result.data.access_token
 
     /* global Kakao */
-    Kakao.init(KEYS.JAVASCRIPT_KEY);
+    if (!Kakao.isInitialized())
+      Kakao.init(KEYS.JAVASCRIPT_KEY);
     Kakao.Auth.setAccessToken(ACCESS_TOKEN)
 
     Kakao.API.request({
       url: '/v2/user/me',
-      success: function(response) {
-        console.log(response);
+      success: async function (response) {
         const user_id = response.id;
         const nickname = response.properties.nickname;
-        console.log(user_id, nickname);
+
+        const signup_response = await User.post({
+          'kakao_id': user_id,
+          'nickname': nickname
+        })
+        console.log(signup_response);
       },
       fail: function(error) {
         console.log(error);
