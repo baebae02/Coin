@@ -29,7 +29,7 @@ export default {
         const nickname = response.properties.nickname;
 
         const signup_response = await User.post({
-          'kakao_id': user_id,
+          'kakao_id': String(user_id),
           'nickname': nickname
         })
         console.log(signup_response);

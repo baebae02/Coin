@@ -1,8 +1,10 @@
 <template>
-  <div class="button"
-       @click="loginWithKakao">
-    <p>Kakao Login</p>
+  <div class="container">
+    <img class="button"
+         src="../assets/kakao_login_medium_narrow.png"
+         @click="loginWithKakao">
   </div>
+
 </template>
 
 <script>
@@ -26,5 +28,8 @@ export default {
 </script>
 
 <style scoped>
-
+.container {
+  display: flex;
+  align-items: center;
+}
 </style>
